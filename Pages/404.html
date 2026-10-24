@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="5;url=index.html"> <!-- Redirects to homepage after 5 seconds -->
+    <title>404 - Page Not Found</title>
+    <link rel="icon" type="image/png" href="Images/Favicon.png">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your stylesheet -->
+</head>
+
+<style>
+    header {
+    padding: 20px;
+    background: var(--header-gradient);
+    color: var(--primary-color);
+    text-align: center;
+    box-shadow: none;
+    border-bottom: 3px double var(--rule-color);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+/* Countdown Text */
+main p span#countdown {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+/* Link Styles (Reusing existing link styles) */
+main a {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Footer Customization */
+footer {
+    background-color: var(--background-color); /* Reuse your existing background color */
+    color: var(--text-color); /* Match footer text color */
+    text-align: center;
+    padding: 1rem 0;
+}
+</style>
+
+<body>
+    
+    <header>
+        <h1>404 - Page Not Found</h1>
+        <p>We couldn't find the page you were looking for.</p>
+    </header>
+
+    <main>
+        <p><span>Page does not exist. Redirecting back to the homepage in</span> <span id="countdown">5</span> <span>seconds.</span></p>
+        <p><span>If you think this is a mistake, please</span> <a href="contact.html">contact me</a>.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Kanishk Bakshi. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for countdown -->
+    <script>
+        let countdown = document.getElementById("countdown");
+        let seconds = 5;
+        const interval = setInterval(() => {
+            seconds--;
+            countdown.textContent = seconds;
+            if (seconds <= 0) clearInterval(interval);
+        }, 1000);
+    </script>
+</body>
+</html>
