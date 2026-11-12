@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Kanishk Bakshi - Contact</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="Images/Favicon.png">
+
+    <link rel="stylesheet"
+          href="styles.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700&display=swap"
+          rel="stylesheet">
+
+    <link rel="alternate" href="contact.html" hreflang="en" />
+    <link rel="alternate" href="contact.html?lang=hi" hreflang="hi" />
+
+    <style>
+
+        /* =========================================
+           CONTACT PAGE SPECIFIC STYLES
+        ========================================= */
+
+        .contact-card {
+            padding: 2.5rem 2rem;
+            margin-top: 2.5rem;
+            background: var(--card-gradient);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-row {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .china-contact-box {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-title {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social-links li {
+            margin-bottom: 1.2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-links a:hover {
+            transform: translateX(6px);
+            color: var(--link-hover-color);
+        }
+
+        .calendar-section {
+            margin-top: 3rem;
+        }
+
+        .calendar-card {
+            padding: 2rem;
+            background: var(--card-gradient);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .calendar-title,
+        .appointment-title {
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .calendar-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .appointment-title {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-description {
+            text-align: center;
+            color: var(--muted-text);
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calendar-wrapper {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-wrapper iframe {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: var(--card-bg);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .calendar-embed {
+            height: 80vh;
+            min-height: 500px;
+        }
+
+        .appointment-embed {
+            height: 650px;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================= */
+
+        @media (max-width: 992px) {
+
+            .calendar-embed {
+                height: 75vh;
+            }
+
+            .appointment-embed {
+                height: 700px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .calendar-embed {
+                height: 70vh;
+                min-height: 450px;
+            }
+
+            .appointment-embed {
+                height: 760px;
+            }
+
+            .contact-card,
+            .calendar-card {
+                padding: 2rem 1.2rem;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+
+        <div class="container">
+
+            <h1><a href="index.html">Kanishk Bakshi</a></h1>
+
+            <div class="subtitle">
+                Contact Me
+            </div>
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="publications.html">
+                            Publications
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cv.html">
+                            CV
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main>
+
+        <!-- =========================================
+             CONTACT SECTION
+        ========================================== -->
+
+        <section class="container"
+                 style="max-width:700px;">
+
+            <div class="card-section contact-card">
+
+                <h2 class="contact-title">
+
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Get in Touch</span>
+
+                </h2>
+
+                <div class="contact-row">
+
+                    <span class="contact-label">
+
+                        <i class="fas fa-envelope"></i>
+                        <span>Email:</span>
+
+                    </span>
+
+                    <a href="mailto:kanishkbakshi@zohomail.in"
+                       style="margin-left:0.5rem;">
+
+                        kanishkbakshi@zohomail.in
+
+                    </a>
+
+                </div>
+
+                <h3 class="social-title">
+
+                    <i class="fas fa-share-alt"></i>
+                    <span>Other Platforms</span>
+
+                </h3>
+
+                <ul class="social-links">
+
+                    <li>
+
+                        <a href="https://www.linkedin.com/in/kanishkbakshi/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fab fa-linkedin"
+                               style="color:#0077b5;"></i>
+
+                            <span>LinkedIn</span>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="https://orcid.org/0009-0000-6602-1283"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fas fa-id-card"
+                               style="color:#a6ce39;"></i>
+
+                            ORCID
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="https://scholar.google.com/citations?user=wjg0PaYAAAAJ&hl=en"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i class="fas fa-graduation-cap"
+                               style="color:#4285f4;"></i>
+
+                            <span>Google Scholar</span>
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- =========================================
+             CALENDAR SECTION
+        ========================================== -->
+
+        <section id="calendar-section"
+                 class="container calendar-section">
+
+            <div class="card-section calendar-card">
+
+                <h2 class="calendar-title">
+
+                    <i class="far fa-calendar-alt"></i>
+                    <span>My Calendar</span>
+
+                </h2>
+
+                <p class="calendar-description">
+
+                    You may view my academic availability and
+                    request meetings using the scheduling system below.
+
+                </p>
+
+                <div class="calendar-wrapper">
+
+                    <iframe
+                        class="calendar-embed"
+                        loading="lazy"
+                        src="https://calendar.zoho.com.cn/zc/ui/embed/#calendar=zz08011230f6a5a2ffb8b9dbf4445050457d9a3a3784762c60d1d6786e64ab2f8f59dfc5de06372730ea50c6e242189119ffb2b470&title=kanishkbakshi&type=1&language=en&timezone=Asia%2FShanghai&showTitle=1&showTimezone=1&startingDayOfWeek=1&timeFormat=0&view=week&showDetail=1&theme=1&showAttendee=1&showSwitchingViews=1&expandAllday=1&eventColorType=light&showLogo=1"                        title="Kanishk Bakshi Calendar"
+                        scrolling="no">
+                    </iframe>
+
+                </div>
+
+                <h3 class="appointment-title">
+
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Schedule Appointment</span>
+
+                </h3>
+
+                <div class="calendar-wrapper">
+
+                    <iframe
+                        class="appointment-embed"
+                        loading="lazy"
+                        src="https://calendar.zoho.com.cn/eventreqForm/zz08011230f6a5a2ffb8b9dbf4445050457d9a3a3784762c60d1d6786e64ab2f8f59dfc5de06372730ea50c6e242189119ffb2b470?theme=0&l=en&tz=Asia%2FShanghai"
+                        title="Schedule Appointment"
+                        scrolling="no"
+                        allowtransparency="true">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                &copy; 2026 Kanishk Bakshi.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

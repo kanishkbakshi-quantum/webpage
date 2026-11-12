@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TrackML Solution | Graph Neural Network, Quantum & Physics-based Approaches</title>
+        <meta name="description" content="Comprehensive solution for the Kaggle TrackML challenge: GNN, hybrid, classical, and quantum approaches for particle tracking at the HL-LHC. Includes technical details, code, and project report.">
+        <meta name="keywords" content="TrackML, Kaggle TrackML, particle tracking, HL-LHC, graph neural network, GNN, quantum computing, QUBO, Kalman filter, Hough transform, combinatorial optimization, high-energy physics, machine learning, deep learning, physics-based tracking, hybrid approach, project report, open source, code, solution, event reconstruction, detector, CERN, LHC, data science, competition, technical details, edge classification, PyTorch Geometric, quantum annealing, D-Wave, Hamiltonian, physics, ML, AI">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="https://kanishkbakshi.in/Project%20Pages/Track%20ML/trackml.html">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:title" content="TrackML Solution | GNN, Quantum & Physics-based Approaches">
+        <meta property="og:description" content="Technical deep dive into the Kaggle TrackML challenge: GNN, hybrid, classical, and quantum solutions for particle tracking.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://kanishkbakshi.in/Project%20Pages/Track%20ML/trackml.html">
+        <meta property="og:image" content="https://kanishkbakshi.in/Project%20Pages/Track%20ML/Images/Graph%20neural%20network.webp">
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="TrackML Solution | GNN, Quantum & Physics-based Approaches">
+        <meta name="twitter:description" content="Technical deep dive into the Kaggle TrackML challenge: GNN, hybrid, classical, and quantum solutions for particle tracking.">
+        <meta name="twitter:image" content="https://kanishkbakshi.in/Project%20Pages/Track%20ML/Images/Graph%20neural%20network.webp">
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            "headline": "TrackML Solution: GNN, Hybrid, Classical & Quantum Approaches",
+            "description": "Comprehensive technical solution for the Kaggle TrackML challenge, including graph neural networks, hybrid pipelines, classical physics-based methods, and quantum optimization.",
+            "author": {
+                "@type": "Person",
+                "name": "Kanishk Bakshi"
+            },
+            "datePublished": "2026-01-06",
+            "keywords": ["TrackML", "Kaggle TrackML", "particle tracking", "GNN", "quantum computing", "QUBO", "Kalman filter", "Hough transform", "high-energy physics", "machine learning", "deep learning", "hybrid approach", "event reconstruction", "CERN", "LHC"]
+        }
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+        <style>
+        :root {
+            --primary-color: #2c3e50; /* Dark Blue */
+            --accent-color: #3498db;  /* Bright Blue */
+            --success-color: #27ae60; /* Green */
+            --failure-color: #e74c3c; /* Red */
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-btn {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover { color: white; }
+
+        .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .project-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary { background-color: white; color: var(--primary-color); }
+        .btn-outline { border: 2px solid white; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 900px;
+            margin: -3rem auto 2rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        h2.section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .project-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+
+        /* --- Timeline Styles --- */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid #ddd;
+        }
+
+        .timeline-item.fail { border-left-color: var(--failure-color); }
+        .timeline-item.benchmark { border-left-color: #f39c12; } /* Orange */
+        .timeline-item.success { border-left-color: var(--accent-color); }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .timeline-item.fail::before { background: var(--failure-color); }
+        .timeline-item.benchmark::before { background: #f39c12; }
+        .timeline-item.success::before { background: var(--accent-color); }
+
+        .phase-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* --- QUANTUM SPECIAL SECTION --- */
+        .quantum-card {
+            background: linear-gradient(145deg, #ffffff, #f0f7ff);
+            border-left: 5px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+        }
+
+        .quantum-card::after {
+            content: 'Ψ';
+            position: absolute;
+            right: -20px;
+            bottom: -40px;
+            font-size: 15rem;
+            color: rgba(52, 152, 219, 0.05);
+            font-family: 'Times New Roman', serif;
+            pointer-events: none;
+        }
+
+        .highlight-text {
+            font-size: 1.05rem;
+            color: #2c3e50;
+            font-weight: 500;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .math-block {
+            font-family: 'Courier New', monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        /* --- Tech Stack --- */
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-tag {
+            background: #eee;
+            color: #555;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="back-nav">
+            <a href="../../index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Main</a>
+        </div>
+        <div class="project-title">Hybrid Graph Neural and Quantum Optimization for TrackML</div>
+        <div class="project-subtitle">Solving the Combinatorial Explosion in HL-LHC Particle Reconstruction</div>
+        
+        <div class="hero-buttons">
+            <a href="Project Report.pdf" target="_blank" class="btn btn-primary">
+                <i class="fas fa-file-pdf"></i> Read Paper
+            </a>
+            <a href="https://workdrive.zoho.in/folder/a1kl822c4ed6c0f3748a8b207f02b64138ef4" target="_blank" class="btn btn-outline">
+                <i class="fab fa-github"></i> View Code
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section class="card">
+            <h2 class="section-title">The Challenge</h2>
+            <p>
+                The High-Luminosity Large Hadron Collider (HL-LHC) will generate data at rates that defy classical computation. With <strong>40 million collisions per second</strong>, we are tasked with reconnecting 100,000 discrete points into accurate particle trajectories.
+            </p>
+            <p>
+                This is a combinatorial nightmare (O(N)). We need an algorithm that is not just accurate, but fast enough for hardware triggers.
+            </p>
+            <video class="project-img" controls autoplay loop muted playsinline>
+            <source src="Images/Particles_colliding-2880x1620_Lede.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="card">
+
+            <h2 class="section-title">The Evolution of the Solution</h2>
+            <div class="timeline-item fail">
+                <span class="phase-title">Phase 1: Graph Neural Network (GNN) Approach</span>
+                <p>
+                    The initial phase leveraged a <strong>Graph Neural Network (GNN)</strong> to address the combinatorial complexity of the TrackML challenge. Each detector hit was represented as a node, and potential connections (edges) were constructed based on geometric and physical constraints. The GNN was trained on labeled data to classify edges as true or false, using features such as spatial coordinates, layer information, and local hit density. The model architecture included multiple message-passing layers and edge classification heads, enabling the network to learn complex spatial relationships and suppress noise.
+                </p>
+                <p>
+                    <strong>Technical Details:</strong> The GNN was implemented using PyTorch Geometric, with a custom loss function to balance precision and recall. Training involved data augmentation and hard negative mining to improve generalization. The output was a pruned graph where only high-confidence edges remained, dramatically reducing the search space for subsequent tracking algorithms.
+                </p>
+                <p>
+                    <strong>Result:</strong> The GNN approach achieved a substantial reduction in combinatorial candidates and improved initial track seeding, but struggled with ambiguous topologies and overlapping tracks, motivating the need for hybridization.
+                </p>
+            </div>
+
+            <div class="timeline-item benchmark">
+                <span class="phase-title">Phase 2: Mixed (GNN + Classical) Approach</span>
+                <p>
+                    In the second phase, a hybrid pipeline was developed. The GNN output served as a filter, and a classical track-building algorithm (inspired by combinatorial Kalman filtering) was applied to the reduced graph. This stage used physics-based constraints—such as momentum conservation, curvature in the magnetic field, and hit continuity—to assemble valid tracks from the GNN-pruned candidates.
+                </p>
+                <p>
+                    <strong>Technical Details:</strong> The classical component used a breadth-first search to grow tracks, scoring candidates with a custom cost function incorporating both GNN edge confidence and physical plausibility. Tracks were iteratively extended and validated, with ambiguous hits resolved using a global assignment strategy. This approach balanced the speed of deep learning with the interpretability and robustness of physics-based logic.
+                </p>
+                <p>
+                    <strong>Result:</strong> The mixed approach achieved high accuracy and efficiency, outperforming standalone GNN or classical methods. However, it still required iterative refinement and was sensitive to the GNN's edge predictions in dense regions.
+                </p>
+            </div>
+
+            <div class="timeline-item benchmark">
+                <span class="phase-title">Phase 3: Classical Physics-Based Approach</span>
+                <p>
+                    The third phase focused on a purely physics-driven solution, leveraging established algorithms from high-energy physics. Techniques such as the Hough transform and combinatorial Kalman filter were used to identify track candidates directly from the raw hit data, without deep learning pre-filtering. These methods exploited the helical trajectories of charged particles in a magnetic field, using parameter space voting and recursive state estimation to reconstruct tracks.
+                </p>
+                <p>
+                    <strong>Technical Details:</strong> The Hough transform mapped hits into a parameter space (e.g., curvature, angle), where tracks appeared as peaks. The Kalman filter iteratively updated track parameters as new hits were added, accounting for measurement uncertainty and multiple scattering. Post-processing steps included duplicate removal and outlier rejection based on chi-squared statistics.
+                </p>
+                <p>
+                    <strong>Result:</strong> The classical physics-based approach provided robust, interpretable results and served as a strong baseline. However, it was computationally intensive and less scalable for the extreme event rates of the HL-LHC, highlighting the need for quantum and hybrid solutions.
+                </p>
+            </div>
+
+            <div class="timeline-item success">
+                <span class="phase-title" style="font-size: 1.4rem; color: var(--accent-color);">Phase 4: The Quantum Leap (Hybrid GNN-QUBO)</span>
+                <p>
+                    We realized that to beat the speed limit, we had to stop searching for tracks and start <strong>solving the system as a whole.</strong> We moved from Iterative logic to Quantum Physics.
+                </p>
+                <div class="quantum-card">
+                    <h3 style="color: var(--primary-color); margin-top:0;">1. The Architect (Graph Neural Network)</h3>
+                    <p>
+                        We use a Geometric Deep Learning pipeline (GNN) to construct a "Graph of Possibilities." It doesn't solve the problem; it strips away the obvious noise, leaving us with a clean scaffolding of potential connections.
+                    </p>
+                    <img src="Images/Graph neural network.webp" alt="Graph Neural Network Structure" class="project-img" style="margin-bottom: 1rem;">
+                    <h3 style="color: var(--primary-color);">2. The Judge (Hamiltonian Physics)</h3>
+                    <p>
+                        This is the core innovation. We translate the laws of physics into a mathematical equation called a <strong>Hamiltonian (H)</strong>.
+                    </p>
+                    <div class="highlight-text">
+                        We don't code "rules." We create an energy landscape. <br>
+                        A valid particle track represents the <strong>Low Energy Ground State</strong>. A broken track creates <strong>High Energy Friction</strong>.
+                    </div>
+                    <div class="math-block">
+                        Minimize: H = &sum; (Connection Strength) - &sum; (Physical Constraints)
+                    </div>
+                    <h3 style="color: var(--primary-color);">3. The Solver (Quantum Tunneling)</h3>
+                    <p>
+                        Classical algorithms (like the Kaggle solution) get stuck in "local minima"—they find a good path and stop looking. <br><br>
+                        <strong>Quantum Annealing plays by different rules.</strong> By exploiting quantum tunneling, our solver can pass <em>through</em> energy barriers, exploring the entire solution space simultaneously. It doesn't iterate; it settles into the optimal solution instantly.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Technologies Used</h2>
+            <ul class="tech-list">
+                <li class="tech-tag">Python & C++</li>
+                <li class="tech-tag">PyTorch GNN</li>
+                <li class="tech-tag">DBSCAN (Baseline)</li>
+                <li class="tech-tag">Kaggle Top-Quarks Logic</li>
+                <li class="tech-tag">QUBO Formulation</li>
+                <li class="tech-tag">D-Wave Quantum Annealer</li>
+                <li class="tech-tag">Hamiltonian Optimization</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- Embedded Project Report PDF -->
+    <div class="container">
+        <section class="card">
+            <h2 class="section-title">Project Report (Full PDF)</h2>
+            <object data="Project Report.pdf" type="application/pdf" width="100%" height="600px">
+                <p>Your browser does not support PDFs. <a href="Project Report.pdf" download>Download the Project Report PDF</a></p>
+            </object>
+        </section>
+    </div>
+
+</body>
+</html>
